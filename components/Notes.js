@@ -16,7 +16,6 @@ export default function Notes({ onAddNote, currentRemedy }) {
 
     onAddNote(currentRemedy.id, newNote);
 
-    console.log("newNote", newNote);
     form.reset();
     textArea.focus();
   }

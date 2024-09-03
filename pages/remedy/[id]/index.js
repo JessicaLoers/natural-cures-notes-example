@@ -15,8 +15,6 @@ export default function RemedyDetailsPage({
   const router = useRouter();
   const { id } = router.query;
 
-  if (!id) return;
-
   const currentRemedy = remedies.find((remedy) => remedy.id === id);
 
   if (!currentRemedy) {
