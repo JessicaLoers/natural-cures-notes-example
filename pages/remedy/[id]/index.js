@@ -8,6 +8,7 @@ import Notes from "@/components/Notes";
 
 export default function RemedyDetailsPage({
   remedies,
+  handleAddNotes,
   handleDeleteRemedy,
   handleToggleFavorite,
 }) {
@@ -61,7 +62,7 @@ export default function RemedyDetailsPage({
         }}
       />
       <StyledLink href={`/remedy/${id}/edit`}>Edit Remedy</StyledLink>
-      <Notes remedyId={id} />
+      <Notes onAddNote={handleAddNotes} currentRemedy={currentRemedy} />
       <Link href="/"> &larr; Back</Link>
     </>
   );
