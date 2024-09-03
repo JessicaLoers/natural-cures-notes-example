@@ -1,11 +1,27 @@
 import GlobalStyle from "../styles";
 import initialRemedies from "../assets/remedies.json";
-import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
+
 import { uid } from "uid";
 
 export default function App({ Component, pageProps }) {
-  const [remedies, setRemedies] = useState(initialRemedies);
-  // comments
+  // remedies with comments ⬇️
+  const [remedies, setRemedies] = useLocalStorageState("_REMEDIES", {
+    defaultValue: initialRemedies,
+  });
+
+  function handleAddNotes(remedyId, note) {
+    setRemedies(
+      remedies.map((remedy) =>
+        remedy.id === remedyId
+          ? {
+              ...remedy,
+              notes: [...(remedy.notes || []), { id: uid(), ...note }],
+            }
+          : remedy
+      )
+    );
+  }
 
   function handleAddRemedy(newRemedy) {
     setRemedies([
@@ -42,6 +58,7 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
         remedies={remedies}
+        handleAddNotes={handleAddNotes}
         handleAddRemedy={handleAddRemedy}
         handleDeleteRemedy={handleDeleteRemedy}
         handleEditRemedy={handleEditRemedy}

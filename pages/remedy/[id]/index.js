@@ -8,11 +8,14 @@ import Notes from "@/components/Notes";
 
 export default function RemedyDetailsPage({
   remedies,
+  handleAddNotes,
   handleDeleteRemedy,
   handleToggleFavorite,
 }) {
   const router = useRouter();
   const { id } = router.query;
+
+  if (!id) return;
 
   const currentRemedy = remedies.find((remedy) => remedy.id === id);
 
@@ -61,7 +64,7 @@ export default function RemedyDetailsPage({
         }}
       />
       <StyledLink href={`/remedy/${id}/edit`}>Edit Remedy</StyledLink>
-      <Notes remedyId={id} />
+      <Notes onAddNote={handleAddNotes} currentRemedy={currentRemedy} />
       <Link href="/"> &larr; Back</Link>
     </>
   );
