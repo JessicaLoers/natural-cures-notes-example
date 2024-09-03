@@ -6,6 +6,8 @@ export default function Notes({ remedyId }) {
   const [notes, setNotes] = useLocalStorage("notes", []);
   const [note, setNote] = useState("");
 
+  console.log("Notes", notes);
+
   const [showTextField, setShowTextField] = useState(false);
   const currentRemedyNotes = notes[remedyId] || [];
 
